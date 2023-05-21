@@ -1,9 +1,15 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@hono/graphql-server':
+    specifier: ^0.4.0
+    version: 0.4.0(hono@3.2.1)
   '@hono/node-server':
     specifier: ^1.0.0
     version: 1.0.0
+  graphql:
+    specifier: ^16.6.0
+    version: 16.6.0
   hono:
     specifier: ^3.2.1
     version: 3.2.1
@@ -234,6 +240,16 @@ packages:
     dev: true
     optional: true
 
+  /@hono/graphql-server@0.4.0(hono@3.2.1):
+    resolution: {integrity: sha512-Jlkme0Pyjpzfk/ZezJBv84SeVIr8yKNuv4WOTU8j3nQOfnzfwA+Yo0+hy6RzRwPnyaa317rNEMJobfqMrx7bPA==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      hono: ^3.0.0
+    dependencies:
+      graphql: 16.6.0
+      hono: 3.2.1
+    dev: false
+
   /@hono/node-server@1.0.0:
     resolution: {integrity: sha512-zoj5CQAOfLHtRbO3Er29XadmIFaWuYDq3eOs8C6h6Uh3p9NsO6IM5r/VktmzrAUkSj9KPJGSKtA/Zgbp5j9lVg==}
     engines: {node: '>=18.0.0'}
@@ -284,6 +300,11 @@ packages:
   /get-tsconfig@4.5.0:
     resolution: {integrity: sha512-MjhiaIWCJ1sAU4pIQ5i5OfOuHHxVo1oYeNsWTON7jxYkod8pHocXeh+SSbmu5OZZZK73B6cbJ2XADzXehLyovQ==}
     dev: true
+
+  /graphql@16.6.0:
+    resolution: {integrity: sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==}
+    engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
+    dev: false
 
   /hono@3.2.1:
     resolution: {integrity: sha512-yWpBvr5E5u2JPsVfgBOBlfqbpTCkTE5nZWB0WrA5QJYTQCf39WjhkZ4iFLP/tv4hgWBtXC+aWGyCHt11H10ghg==}
