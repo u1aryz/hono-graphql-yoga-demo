@@ -1,4 +1,4 @@
-import { Hono } from "hono";
+import { Context, Hono } from "hono";
 import { buildSchema } from "graphql";
 import { graphqlServer } from "@hono/graphql-server";
 import { serve } from "@hono/node-server";
@@ -11,7 +11,7 @@ type Query {
 }
 `);
 
-const rootResolver = (ctx) => {
+const rootResolver = (ctx: Context) => {
 	return {
 		hello: () => "Hello Hono!",
 	};
