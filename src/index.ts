@@ -1,30 +1,30 @@
-import { Hono } from 'hono'
-import { buildSchema } from 'graphql'
-import {graphqlServer} from "@hono/graphql-server";
-import {serve} from "@hono/node-server";
+import { Hono } from "hono";
+import { buildSchema } from "graphql";
+import { graphqlServer } from "@hono/graphql-server";
+import { serve } from "@hono/node-server";
 
-export const app = new Hono()
+export const app = new Hono();
 
 const schema = buildSchema(`
 type Query {
   hello: String
 }
-`)
+`);
 
 const rootResolver = (ctx) => {
-  return {
-    hello: () => 'Hello Hono!',
-  }
-}
+	return {
+		hello: () => "Hello Hono!",
+	};
+};
 
 app.use(
-  '/graphql',
-  graphqlServer({
-    schema,
-    rootResolver,
-  })
-)
+	"/graphql",
+	graphqlServer({
+		schema,
+		rootResolver,
+	}),
+);
 
 serve(app, (info) => {
-  console.log(`Listening on http://localhost:${info.port}`)
-})
+	console.log(`Listening on http://localhost:${info.port}`);
+});

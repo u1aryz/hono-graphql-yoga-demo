@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "tsx src/index.ts",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "format": "rome check src --apply-unsafe && rome format src --write"
   },
   "dependencies": {
     "@hono/graphql-server": "^0.4.0",
@@ -10,6 +11,7 @@
     "hono": "^3.2.1"
   },
   "devDependencies": {
+    "rome": "^12.1.2",
     "tsx": "^3.12.2"
   }
 }
