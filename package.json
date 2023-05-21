@@ -2,7 +2,14 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
-    "format": "rome check src --apply-unsafe && rome format src --write"
+    "format": "rome check src --apply-unsafe && rome format src --write",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "npm run format"
+    ]
   },
   "dependencies": {
     "@hono/graphql-server": "^0.4.0",
@@ -11,6 +18,8 @@
     "hono": "^3.2.1"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "rome": "^12.1.2",
     "tsx": "^3.12.2"
   }
