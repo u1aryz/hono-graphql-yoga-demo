@@ -1,15 +1,14 @@
 import { Context, Hono } from "hono";
-import { buildSchema } from "graphql";
 import { graphqlServer } from "@hono/graphql-server";
 import { serve } from "@hono/node-server";
+import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
+import { loadSchemaSync } from "@graphql-tools/load";
 
 export const app = new Hono();
 
-const schema = buildSchema(`
-type Query {
-  hello: String
-}
-`);
+const schema = loadSchemaSync("src/typeDefs/**/*.graphql", {
+	loaders: [new GraphQLFileLoader()],
+});
 
 const rootResolver = (ctx: Context) => {
 	return {
