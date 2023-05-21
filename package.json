@@ -4,7 +4,8 @@
     "dev": "tsx watch src/index.ts",
     "format": "rome check src --apply-unsafe && rome format src --write",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "lint-staged": {
     "*.{js,ts}": [
@@ -20,6 +21,10 @@
     "hono": "^3.2.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "3.3.1",
+    "@graphql-codegen/introspection": "3.0.1",
+    "@graphql-codegen/typescript": "3.0.4",
+    "@graphql-codegen/typescript-resolvers": "3.2.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "rome": "^12.1.2",
