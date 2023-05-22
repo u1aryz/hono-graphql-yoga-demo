@@ -1,34 +1,15 @@
-import { YogaInitialContext } from "graphql-yoga";
+import { YogaServerInstance } from "graphql-yoga";
 import { Context, MiddlewareHandler } from "hono";
-import {
-	constraintDirectiveTypeDefs,
-	createEnvelopQueryValidationPlugin,
-} from "graphql-constraint-directive";
-import { loadFilesSync } from "@graphql-tools/load-files";
-import { createSchema, createYoga } from "graphql-yoga";
 
-const typeDefs = [
-	constraintDirectiveTypeDefs,
-	...loadFilesSync("src/typeDefs/**/*.graphql"),
-];
-const resolvers = loadFilesSync("src/resolvers/rootResolvers.ts");
+type Recordable = Record<string, unknown>;
 
-type Options<T extends Record<string, unknown>> = {
-	createContext: (initialContext: YogaInitialContext) => Promise<T>;
-	graphqlEndpoint?: string;
+type Options<T extends Recordable, U extends Recordable> = {
+	yoga: YogaServerInstance<T, U>;
 };
 
-export const yogaHandler = <T extends Record<string, unknown>>({
-	createContext,
-	graphqlEndpoint,
-}: Options<T>): MiddlewareHandler => {
-	const yoga = createYoga({
-		schema: createSchema({ typeDefs, resolvers }),
-		context: createContext,
-		plugins: [createEnvelopQueryValidationPlugin()],
-		graphqlEndpoint,
-	});
-
+export const yogaHandler = <T extends Recordable, U extends Recordable>({
+	yoga,
+}: Options<T, U>): MiddlewareHandler => {
 	return async (c: Context) => {
 		const { req } = c;
 		// The content-type must be application/json
