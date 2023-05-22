@@ -1,5 +1,5 @@
 import { QueryResolvers } from "../generated/graphql";
 
 export const queryResolvers: QueryResolvers = {
-	hello: () => "Hello Hono!",
+	hello: (parent, args, context) => `Hello ${context.name}!`,
 };

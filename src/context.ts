@@ -1,1 +1,3 @@
-export type Context = {};
+export type Context = {
+	name: string;
+};
