@@ -16,6 +16,7 @@
     "@graphql-tools/load-files": "^7.0.0",
     "@hono/node-server": "^1.0.0",
     "graphql": "^16.6.0",
+    "graphql-constraint-directive": "^5.1.1",
     "graphql-yoga": "^3.9.1",
     "hono": "^3.2.1"
   },

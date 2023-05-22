@@ -1,3 +1,7 @@
 type Query {
-    hello: String
+    hello(input: HelloInput!): String
+}
+
+input HelloInput {
+    name: String! @constraint(minLength: 2)
 }

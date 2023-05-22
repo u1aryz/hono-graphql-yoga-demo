@@ -2,8 +2,15 @@ import { createSchema, createYoga } from "graphql-yoga";
 import { loadFilesSync } from "@graphql-tools/load-files";
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
+import {
+	constraintDirectiveTypeDefs,
+	createEnvelopQueryValidationPlugin,
+} from "graphql-constraint-directive";
 
-const typeDefs = loadFilesSync("src/typeDefs/**/*.graphql");
+const typeDefs = [
+	constraintDirectiveTypeDefs,
+	loadFilesSync("src/typeDefs/**/*.graphql"),
+];
 const resolvers = loadFilesSync("src/resolvers/rootResolvers.ts");
 
 const yoga = createYoga({
@@ -14,6 +21,7 @@ const yoga = createYoga({
 			name: "Hono",
 		};
 	},
+	plugins: [createEnvelopQueryValidationPlugin()],
 });
 
 const app = new Hono();
@@ -29,7 +37,7 @@ app.use(yoga.graphqlEndpoint, async (c) => {
 	});
 	const result = await response.text();
 	const headers = Object.fromEntries(response.headers.entries());
-	return c.text(result, response.status, headers);
+	return c.text(result, 200, headers);
 });
 
 serve(app, (info) => {

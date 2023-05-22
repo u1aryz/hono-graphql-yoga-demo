@@ -10,6 +10,9 @@ dependencies:
   graphql:
     specifier: ^16.6.0
     version: 16.6.0
+  graphql-constraint-directive:
+    specifier: ^5.1.1
+    version: 5.1.1(graphql@16.6.0)
   graphql-yoga:
     specifier: ^3.9.1
     version: 3.9.1(graphql@16.6.0)
@@ -2432,6 +2435,18 @@ packages:
       - utf-8-validate
     dev: true
 
+  /graphql-constraint-directive@5.1.1(graphql@16.6.0):
+    resolution: {integrity: sha512-pbnbDZo5WlJBjLEmlUqHnp2SAbVlFQfIxts4hBZatRNy6vMxk9XngCA0NFq8PzocLUhkMDeZ8BW+/St7/RO/bQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      graphql: '>=14.0.0'
+    dependencies:
+      '@graphql-tools/schema': 9.0.19(graphql@16.6.0)
+      '@graphql-tools/utils': 9.2.1(graphql@16.6.0)
+      graphql: 16.6.0
+      validator: 13.9.0
+    dev: false
+
   /graphql-request@6.0.0(graphql@16.6.0):
     resolution: {integrity: sha512-2BmHTuglonjZvmNVw6ZzCfFlW/qkIPds0f+Qdi/Lvjsl3whJg2uvHmSvHnLWhUTEw6zcxPYAHiZoPvSVKOZ7Jw==}
     peerDependencies:
@@ -3620,6 +3635,11 @@ packages:
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /validator@13.9.0:
+    resolution: {integrity: sha512-B+dGG8U3fdtM0/aNK4/X8CXq/EcxU2WPrPEkJGslb47qyHsxmbggTWK0yEA4qnYVNF+nxNlN88o14hIcPmSIEA==}
+    engines: {node: '>= 0.10'}
+    dev: false
 
   /value-or-promise@1.0.12:
     resolution: {integrity: sha512-Z6Uz+TYwEqE7ZN50gwn+1LCVo9ZVrpxRPOhOLnncYkY1ZzOYtrX8Fwf/rFktZ8R5mJms6EZf5TqNOMeZmnPq9Q==}
