@@ -6,6 +6,7 @@ import {
 	constraintDirectiveTypeDefs,
 	createEnvelopQueryValidationPlugin,
 } from "graphql-constraint-directive";
+import { yogaHandler } from "./middleware/yoga-handler";
 
 const typeDefs = [
 	constraintDirectiveTypeDefs,
@@ -25,20 +26,7 @@ const yoga = createYoga({
 });
 
 const app = new Hono();
-
-app.use(yoga.graphqlEndpoint, async (c) => {
-	const { req } = c;
-	// The content-type must be application/json
-	const params = await req.json();
-	const response = await yoga.fetch(req.url, {
-		method: req.method,
-		headers: req.headers,
-		body: JSON.stringify(params),
-	});
-	const result = await response.text();
-	const headers = Object.fromEntries(response.headers.entries());
-	return c.text(result, 200, headers);
-});
+app.use(yoga.graphqlEndpoint, yogaHandler({ yoga }));
 
 serve(app, (info) => {
 	console.log(`Listening on http://localhost:${info.port}`);
