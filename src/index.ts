@@ -2,7 +2,6 @@ import { createSchema, createYoga } from "graphql-yoga";
 import { loadFilesSync } from "@graphql-tools/load-files";
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
-import { parseBody } from "@hono/graphql-server/dist/parse-body";
 
 const typeDefs = loadFilesSync("src/typeDefs/**/*.graphql");
 const resolvers = loadFilesSync("src/resolvers/rootResolvers.ts");
@@ -21,7 +20,8 @@ const app = new Hono();
 
 app.use(yoga.graphqlEndpoint, async (c) => {
 	const { req } = c;
-	const params = await parseBody(req.raw);
+	// The content-type must be application/json
+	const params = await req.json();
 	const response = await yoga.fetch(req.url, {
 		method: req.method,
 		headers: req.headers,
@@ -29,7 +29,7 @@ app.use(yoga.graphqlEndpoint, async (c) => {
 	});
 	const result = await response.text();
 	const headers = Object.fromEntries(response.headers.entries());
-	return c.json(JSON.parse(result), response.status, headers);
+	return c.text(result, response.status, headers);
 });
 
 serve(app, (info) => {
