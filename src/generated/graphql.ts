@@ -22,6 +22,7 @@ export type HelloInput = {
 export type Query = {
   __typename?: 'Query';
   hello?: Maybe<Scalars['String']>;
+  helloAuthUser?: Maybe<Scalars['String']>;
 };
 
 
@@ -114,11 +115,19 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
 };
 
+export type AuthDirectiveArgs = { };
+
+export type AuthDirectiveResolver<Result, Parent, ContextType = Context, Args = AuthDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<QueryHelloArgs, 'input'>>;
+  helloAuthUser?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = Context> = {
   Query?: QueryResolvers<ContextType>;
 };
 
+export type DirectiveResolvers<ContextType = Context> = {
+  auth?: AuthDirectiveResolver<any, any, ContextType>;
+};

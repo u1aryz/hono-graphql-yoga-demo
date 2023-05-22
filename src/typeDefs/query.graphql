@@ -1,5 +1,8 @@
+directive @auth on FIELD_DEFINITION
+
 type Query {
     hello(input: HelloInput!): String
+    helloAuthUser: String @auth
 }
 
 input HelloInput {

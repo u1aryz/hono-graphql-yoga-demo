@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@envelop/generic-auth':
+    specifier: ^5.0.6
+    version: 5.0.6(@envelop/core@3.0.6)(graphql@16.6.0)
   '@graphql-tools/load-files':
     specifier: ^7.0.0
     version: 7.0.0(graphql@16.6.0)
@@ -671,6 +674,30 @@ packages:
     resolution: {integrity: sha512-06t1xCPXq6QFN7W1JUEf68aCwYN0OUDNAIoJe7bAqhaoa2vn7NCcuX1VHkJ/OWpmElUgCsRO6RiBbIru1in0Ig==}
     dependencies:
       '@envelop/types': 3.0.2
+      tslib: 2.5.2
+    dev: false
+
+  /@envelop/extended-validation@2.0.6(@envelop/core@3.0.6)(graphql@16.6.0):
+    resolution: {integrity: sha512-aXAf1bg5Z71YfEKLCZ8OMUZAOYPGHV/a+7avd5TIMFNDxl5wJTmIonep3T+kdMpwRInDphfNPGFD0GcGdGxpHg==}
+    peerDependencies:
+      '@envelop/core': ^3.0.6
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+    dependencies:
+      '@envelop/core': 3.0.6
+      '@graphql-tools/utils': 8.13.1(graphql@16.6.0)
+      graphql: 16.6.0
+      tslib: 2.5.2
+    dev: false
+
+  /@envelop/generic-auth@5.0.6(@envelop/core@3.0.6)(graphql@16.6.0):
+    resolution: {integrity: sha512-4z4juF7Is0oitymc0kcPK9bBAnB2Anyf9QBqe0Muh0NtkF8PrloUb3E+JzwHlDY8bVSESj0G+MpJOFNU2fjrJg==}
+    peerDependencies:
+      '@envelop/core': ^3.0.6
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+    dependencies:
+      '@envelop/core': 3.0.6
+      '@envelop/extended-validation': 2.0.6(@envelop/core@3.0.6)(graphql@16.6.0)
+      graphql: 16.6.0
       tslib: 2.5.2
     dev: false
 
@@ -1419,6 +1446,15 @@ packages:
       - encoding
       - utf-8-validate
     dev: true
+
+  /@graphql-tools/utils@8.13.1(graphql@16.6.0):
+    resolution: {integrity: sha512-qIh9yYpdUFmctVqovwMdheVNJqFh+DQNWIhX87FJStfXYnmweBUDATok9fWPleKeFwxnW8IapKmY8m8toJEkAw==}
+    peerDependencies:
+      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    dependencies:
+      graphql: 16.6.0
+      tslib: 2.5.2
+    dev: false
 
   /@graphql-tools/utils@9.2.1(graphql@16.6.0):
     resolution: {integrity: sha512-WUw506Ql6xzmOORlriNrD6Ugx+HjVgYxt9KCXD9mHAak+eaXSwuGGPyE60hy9xaDEoXKBsG7SkG69ybitaVl6A==}

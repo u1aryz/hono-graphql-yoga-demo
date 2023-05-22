@@ -8,6 +8,12 @@ import {
 	createEnvelopQueryValidationPlugin,
 } from "graphql-constraint-directive";
 import { loadFilesSync } from "@graphql-tools/load-files";
+import {
+	ResolveUserFn,
+	useGenericAuth,
+	ValidateUserFn,
+} from "@envelop/generic-auth";
+import { GraphQLError } from "graphql/error";
 
 const typeDefs = [
 	constraintDirectiveTypeDefs,
@@ -15,6 +21,24 @@ const typeDefs = [
 ];
 
 const resolvers = loadFilesSync("src/resolvers/rootResolvers.ts");
+
+type UserType = {
+	id: string;
+};
+
+const resolveUserFn: ResolveUserFn<UserType, Context> = async (context) => {
+	// DBとかに接続して
+	return {
+		id: "aaa",
+	};
+};
+
+const validateUser: ValidateUserFn<UserType> = (params) => {
+	const { user } = params;
+	if (user.id !== "bbb") {
+		return new GraphQLError("Unauthenticated.");
+	}
+};
 
 async function createContext(
 	initialContext: YogaInitialContext,
@@ -27,7 +51,14 @@ async function createContext(
 const yoga = createYoga({
 	schema: createSchema({ typeDefs, resolvers }),
 	context: createContext,
-	plugins: [createEnvelopQueryValidationPlugin()],
+	plugins: [
+		createEnvelopQueryValidationPlugin(),
+		useGenericAuth({
+			resolveUserFn,
+			validateUser,
+			mode: "protect-granular",
+		}),
+	],
 });
 
 const app = new Hono();
