@@ -1,3 +1,3 @@
 export type Context = {
-	name: string;
+	token?: string | null;
 };

@@ -28,23 +28,29 @@ type UserType = {
 
 const resolveUserFn: ResolveUserFn<UserType, Context> = async (context) => {
 	// DBとかに接続して
-	return {
-		id: "aaa",
-	};
+	if (context.token) {
+		return {
+			id: "aaa",
+		};
+	} else {
+		return null;
+	}
 };
 
 const validateUser: ValidateUserFn<UserType> = (params) => {
+	// @authが無くてresolveUserFnがnullの場合は呼ばれない
 	const { user } = params;
-	if (user.id !== "bbb") {
+	if (!user) {
 		return new GraphQLError("Unauthenticated.");
 	}
 };
 
-async function createContext(
-	initialContext: YogaInitialContext,
-): Promise<Context> {
+async function createContext({
+	request,
+}: YogaInitialContext): Promise<Context> {
+	const token = request.headers.get("Authorization")?.replace("Bearer ", "");
 	return {
-		name: "test",
+		token,
 	};
 }
 
