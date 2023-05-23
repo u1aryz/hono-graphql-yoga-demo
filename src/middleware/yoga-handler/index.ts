@@ -1,13 +1,13 @@
 import { YogaServerInstance } from "graphql-yoga";
 import { Context, MiddlewareHandler } from "hono";
 
-type Recordable = Record<string, unknown>;
+type Props = Record<string, unknown>;
 
-type Options<T extends Recordable, U extends Recordable> = {
+type Options<T extends Props, U extends Props> = {
 	yoga: YogaServerInstance<T, U>;
 };
 
-export const yogaHandler = <T extends Recordable, U extends Recordable>({
+export const yogaHandler = <T extends Props, U extends Props>({
 	yoga,
 }: Options<T, U>): MiddlewareHandler => {
 	return async (c: Context) => {
