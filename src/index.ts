@@ -37,10 +37,11 @@ const resolveUserFn: ResolveUserFn<UserType, Context> = async (context) => {
 	}
 };
 
-const validateUser: ValidateUserFn<UserType> = (params) => {
-	// @authが無くてresolveUserFnがnullの場合は呼ばれない
-	const { user } = params;
-	if (!user) {
+const validateUser: ValidateUserFn<UserType> = ({
+	user,
+	fieldAuthDirectiveNode,
+}) => {
+	if (!user && fieldAuthDirectiveNode?.name.value === "auth") {
 		return new GraphQLError("Unauthenticated.");
 	}
 };
