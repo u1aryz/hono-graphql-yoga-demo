@@ -41,7 +41,7 @@ const validateUser: ValidateUserFn<UserType> = ({
 	user,
 	fieldAuthDirectiveNode,
 }) => {
-	if (!user && fieldAuthDirectiveNode?.name.value === "auth") {
+	if (!user && fieldAuthDirectiveNode) {
 		return new GraphQLError("Unauthenticated.");
 	}
 };
