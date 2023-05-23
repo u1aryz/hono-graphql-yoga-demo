@@ -20,6 +20,8 @@ export const yogaHandler = <T extends Props, U extends Props>({
 		});
 		const result = await response.text();
 		const headers = Object.fromEntries(response.headers.entries());
+		// お好みで
+		// return c.text(result, response.status, headers);
 		return c.text(result, 200, headers);
 	};
 };
