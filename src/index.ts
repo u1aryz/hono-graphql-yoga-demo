@@ -69,6 +69,6 @@ app.use(
 	}),
 );
 
-serve(app, (info) => {
+serve({ port: 2222, fetch: app.fetch }, (info) => {
 	console.log(`Listening on http://localhost:${info.port}`);
 });
