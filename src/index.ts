@@ -37,11 +37,14 @@ const resolveUserFn: ResolveUserFn<UserType, Context> = async (context) => {
 	}
 };
 
+// https://github.com/n1ru4l/envelop/blob/main/packages/plugins/generic-auth/src/index.ts
+// defaultProtectSingleValidateFn
 const validateUser: ValidateUserFn<UserType> = ({
 	user,
 	fieldAuthDirectiveNode,
+	fieldAuthExtension,
 }) => {
-	if (!user && fieldAuthDirectiveNode) {
+	if (!user && (fieldAuthDirectiveNode || fieldAuthExtension)) {
 		return new GraphQLError("Unauthenticated.");
 	}
 };
